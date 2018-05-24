@@ -1,7 +1,12 @@
 import datetime
 import openpyxl
 from openpyxl import load_workbook
+from reportlab.pdfgen import canvas
 
+from pdfrw import PdfReader
+from pdfrw.buildxobj import pagexobj
+from pdfrw.toreportlab import makerl
+ 
 producto = 'producto'
 lote = 'lote'
 cantidad_producida = 0
@@ -11,7 +16,7 @@ color = 'color'
 olor = 'olor'
 fecha = 'fecha'
 
-wb = load_workbook(filename = 'coa_project/coa.xlsx')
+wb = load_workbook(filename = 'coa.xlsx')
 
 sheet_coadb = wb['coa_db']
 
@@ -58,10 +63,19 @@ for cell in col_status:
         print(color)
         print(olor)
         print(fecha)
+    pdf_name = lote + '.pdf'
+    c = canvas.Canvas(pdf_name)
+    template = PdfReader('template_sh_fases.pdf',decompress=False).pages
+    t = pagexobj(template[0])
+    c.doForm(makerl(c, t))
+    c.drawString(400,650, producto)
+    c.showPage()
+    c.save()
+
 
                 
             # if cell.is_date:
             #     print(cell.value.date().strftime("%Y/%m/%d"))
             # else:
             #     print(cell.value)
-wb.save('coa_project/coa.xlsx')
+wb.save('coa.xlsx')
