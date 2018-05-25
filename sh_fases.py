@@ -5,12 +5,21 @@ from reportlab.lib.colors import pink, black, red, blue, green
 from pdfrw import PdfReader
 from pdfrw.buildxobj import pagexobj
 from pdfrw.toreportlab import makerl
+
+# Ruta de donde se lee la BBD de excell y la plantilla pdf
+files_path = "files/"
  
 # Nombre del archivo excell de donde se leeran los datos
 excell_file_name = 'SHAMPOO COLAGENO.xlsx'
 
+# Nombre del archivo pdf que se utiliza como plantilla
+pdf_template_file_name = 'template_sh_fases.pdf'
+
+# Ruta donde se guaradaran los archivos
+saved_coa_path = "COAs/"
+
 # Carga del libro excell en wb
-wb = load_workbook(filename=excell_file_name, data_only=True)
+wb = load_workbook(filename=files_path + excell_file_name, data_only=True)
 
 # Carga de la hoja de excell que se quiere leer en sheet
 sheet = wb['SH. COLAGENO']
@@ -70,9 +79,9 @@ for cell in col_status:
 
         # Una vez obtenido los valores se imprimen el el pdf con el siguiente código
 
-        pdf_name = referencia + lote + '.pdf'
-        c = canvas.Canvas(pdf_name)
-        template = PdfReader('template_sh_fases.pdf',decompress=False).pages
+        created_pdf_name = saved_coa_path + referencia + lote + '.pdf'
+        c = canvas.Canvas(created_pdf_name)
+        template = PdfReader(files_path + pdf_template_file_name, decompress=False).pages
         t = pagexobj(template[0])
         c.doForm(makerl(c, t))
         c.setFillColor(blue)
