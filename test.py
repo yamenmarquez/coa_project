@@ -70,6 +70,7 @@ for cell in col_status:
         t = pagexobj(template[0])
         c.doForm(makerl(c, t))
         c.drawString(1.8*inch, 8.91*inch, producto)
+        c.drawString(1.6*inch, 8.31*inch, lote)
         c.showPage()
         c.save()
 
