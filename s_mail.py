@@ -36,7 +36,11 @@ mail_recipients = ['kpisthatmatter@gmail.com', 'maritzahechavarriaduran@gmail.co
 files_to_attach_path = ".coas_por_enviar" +os.sep
 coas_dir_path = "COAs" + os.sep
 
-files_to_attach = os.listdir(files_to_attach_path)
+files_to_attach = []
+files = os.listdir(files_to_attach_path)
+for f in files:
+    if f != '.gitignore':
+        files_to_attach.append(f)
 
 # for f in files_to_attach:
 #     print(f)
