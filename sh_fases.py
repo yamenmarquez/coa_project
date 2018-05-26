@@ -1,3 +1,4 @@
+import os
 import datetime
 from openpyxl import load_workbook
 from reportlab.pdfgen import canvas
@@ -7,7 +8,7 @@ from pdfrw.buildxobj import pagexobj
 from pdfrw.toreportlab import makerl
 
 # Ruta de donde se lee la BBD de excell y la plantilla pdf
-files_path = "files/"
+files_path = "files" + os.sep
  
 # Nombre del archivo excell de donde se leeran los datos
 excell_file_name = 'SHAMPOO COLAGENO.xlsx'
@@ -16,7 +17,7 @@ excell_file_name = 'SHAMPOO COLAGENO.xlsx'
 pdf_template_file_name = 'template_sh_fases.pdf'
 
 # Ruta donde se guaradaran los archivos
-saved_coa_path = "COAs/"
+saved_coa_path = ".coas_por_enviar" + os.sep
 
 # Carga del libro excell en wb
 wb = load_workbook(filename=files_path + excell_file_name, data_only=True)

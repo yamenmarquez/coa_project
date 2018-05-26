@@ -4,6 +4,8 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 
+import shutil
+
 def send_email(smtp_email, smtp_password, mail_recipients, files_to_attach, files_to_attach_path):
 
     msg = MIMEMultipart()
@@ -31,7 +33,24 @@ def send_email(smtp_email, smtp_password, mail_recipients, files_to_attach, file
 smtp_email = 'yamenmarquez@gmail.com'
 smtp_password = 'Lgoogleenon100184'
 mail_recipients = ['kpisthatmatter@gmail.com', 'maritzahechavarriaduran@gmail.com']
-files_to_attach_path = "COAs/"
-files_to_attach = ["SAV CLG SHFCO 12X5500131.pdf", "SAV CLG SHFCO 12X5500132.pdf", "SAV CLG SHFCO 12X5500133.pdf", "SAV CLG SHFCO 12X5500134.pdf", "SAV CLG SHFCO 12X5500135.pdf"]
+files_to_attach_path = ".coas_por_enviar" +os.sep
+coas_dir_path = "COAs" + os.sep
+
+files_to_attach = os.listdir(files_to_attach_path)
+
+# for f in files_to_attach:
+#     print(f)
 
 send_email(smtp_email, smtp_password, mail_recipients, files_to_attach, files_to_attach_path)
+
+current_path = os.getcwd() + os.sep
+
+for file in files_to_attach:
+    origin = current_path + files_to_attach_path + file
+    destination = current_path + coas_dir_path + file
+
+    if os.path.exists(origin):
+        shutil.move(origin, destination)
+        print('El archivo ha sido movido a', origin)
+    else:
+        print('No existe archivo para mover')

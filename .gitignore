@@ -102,3 +102,8 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# My binaries files
+.coas_por_eviar
+COAs 
+files
