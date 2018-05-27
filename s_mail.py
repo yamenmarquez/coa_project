@@ -28,33 +28,3 @@ def send_email(smtp_email, smtp_password, mail_recipients, files_to_attach, file
     server.sendmail(msg['From'], mail_recipients, msg.as_string())
     print('done!')
     server.close()
-
-
-smtp_email = 'yamenmarquez@gmail.com'
-smtp_password = 'Lgoogleenon100184'
-mail_recipients = ['kpisthatmatter@gmail.com', 'maritzahechavarriaduran@gmail.com']
-files_to_attach_path = ".coas_por_enviar" +os.sep
-coas_dir_path = "COAs" + os.sep
-
-files_to_attach = []
-files = os.listdir(files_to_attach_path)
-for f in files:
-    if f != '.gitignore':
-        files_to_attach.append(f)
-
-# for f in files_to_attach:
-#     print(f)
-
-send_email(smtp_email, smtp_password, mail_recipients, files_to_attach, files_to_attach_path)
-
-current_path = os.getcwd() + os.sep
-
-for file in files_to_attach:
-    origin = current_path + files_to_attach_path + file
-    destination = current_path + coas_dir_path + file
-
-    if os.path.exists(origin):
-        shutil.move(origin, destination)
-        print('El archivo ha sido movido a', origin)
-    else:
-        print('No existe archivo para mover')

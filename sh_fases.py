@@ -7,6 +7,8 @@ from pdfrw import PdfReader
 from pdfrw.buildxobj import pagexobj
 from pdfrw.toreportlab import makerl
 
+import s_mail
+
 # Ruta de donde se lee la BBD de excell y la plantilla pdf
 files_path = "files" + os.sep
  
@@ -111,3 +113,34 @@ for cell in col_status:
         c.save()
 
 wb.save(files_path + excell_file_name)
+
+# Bloque de codigo que prueba la ejecución 
+# del envio de los COAs y su gestion
+smtp_email = 'yamenmarquez@gmail.com'
+smtp_password = 'Lgoogleenon100184'
+mail_recipients = ['kpisthatmatter@gmail.com', 'maritzahechavarriaduran@gmail.com']
+files_to_attach_path = ".coas_por_enviar" +os.sep
+coas_dir_path = "COAs" + os.sep
+
+files_to_attach = []
+files = os.listdir(files_to_attach_path)
+for f in files:
+    if f != '.gitignore':
+        files_to_attach.append(f)
+
+# for f in files_to_attach:
+#     print(f)
+
+s_mail.send_email(smtp_email, smtp_password, mail_recipients, files_to_attach, files_to_attach_path)
+
+current_path = os.getcwd() + os.sep
+
+for file in files_to_attach:
+    origin = current_path + files_to_attach_path + file
+    destination = current_path + coas_dir_path + file
+
+    if os.path.exists(origin):
+        s_mail.shutil.move(origin, destination)
+        print('El archivo ha sido movido a', origin)
+    else:
+        print('No existe archivo para mover')
