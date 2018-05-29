@@ -1,6 +1,7 @@
 import os
 import datetime
 from openpyxl import load_workbook
+from constants import COLUMN_NAMES
 
 
 # Variables de prueba para testear el script
@@ -10,7 +11,7 @@ excell_file_name = "SHAMPOO COLAGENO.xlsx"
 excell_sheet_name = 'SH. COLAGENO'
 
 def excell_data(excell_file_path, excell_file_name, excell_sheet_name):
-    """Lee y modifica datos de un libro de excell dado
+    """Lee y modifica datos de un libro de excell que pose una estructura conocida
 
     Argumentos:
     excell_file_path --- Ruta relativa del directotio que contiene el archivo excell qe se quiere manipula
@@ -39,10 +40,15 @@ def excell_data(excell_file_path, excell_file_name, excell_sheet_name):
         if cell.value == 'N':
             row_number = cell.row
             col_number = cell.col_idx
-            sheet.cell(row=row_number, column=col_number, value='V')
+            sheet.cell(row=row_number, column=col_number, value='N')
             row = sheet[row_number]
             for cell in row:
-                print(cell.value)
+                for k, v in COLUMN_NAMES.items():
+                    if v == sheet[str(cell.column)+'1'].value:
+                        COLUMN_NAMES[k] = cell.value
+                print(COLUMN_NAMES[k])
+                
+
     wb.save(excell_file_path + excell_file_name)
 
 excell_data(excell_file_path, excell_file_name, excell_sheet_name) # Línea para probar la ejecuión correcta de este script
