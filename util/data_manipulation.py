@@ -24,7 +24,7 @@ def excell_data(excell_file_path, excell_file_name, excell_sheet_name):
 
     first_row = sheet['1']
 
-    # count = 0 # Línea para probar la ejecuión correcta de este script
+    count = 0 # Línea para probar la ejecuión correcta de este script
 
     for cell in first_row:
         # count = count + 1 # Línea para probar la ejecuión correcta de este script
@@ -43,10 +43,15 @@ def excell_data(excell_file_path, excell_file_name, excell_sheet_name):
             sheet.cell(row=row_number, column=col_number, value='N')
             row = sheet[row_number]
             for cell in row:
+                count = count + 1
                 for k, v in COLUMN_NAMES.items():
-                    if v == sheet[str(cell.column)+'1'].value:
+                    if v == sheet[str(cell.column)+'1'].value: 
+                        # print(count)
                         COLUMN_NAMES[k] = cell.value
-                print(COLUMN_NAMES[k])
+            print(COLUMN_NAMES)
+                        # print("%s,%s" % (k, v))
+                #         COLUMN_NAMES[k] = cell.value
+                # print(COLUMN_NAMES[k])
                 
 
     wb.save(excell_file_path + excell_file_name)
