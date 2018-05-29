@@ -10,7 +10,7 @@ excell_file_path = "../files"  + os.sep
 excell_file_name = "SHAMPOO COLAGENO.xlsx"
 excell_sheet_name = 'SH. COLAGENO'
 
-def excell_data(excell_file_path, excell_file_name, excell_sheet_name):
+def excell_to_coa(excell_file_path, excell_file_name, excell_sheet_name):
     """Lee y modifica datos de un libro de excell que pose una estructura conocida
 
     Argumentos:
@@ -48,6 +48,7 @@ def excell_data(excell_file_path, excell_file_name, excell_sheet_name):
                     if v == sheet[str(cell.column)+'1'].value: 
                         # print(count)
                         COLUMN_NAMES[k] = cell.value
+            print(count)
             print(COLUMN_NAMES)
                         # print("%s,%s" % (k, v))
                 #         COLUMN_NAMES[k] = cell.value
@@ -56,5 +57,5 @@ def excell_data(excell_file_path, excell_file_name, excell_sheet_name):
 
     wb.save(excell_file_path + excell_file_name)
 
-excell_data(excell_file_path, excell_file_name, excell_sheet_name) # Línea para probar la ejecuión correcta de este script
+excell_to_coa(excell_file_path, excell_file_name, excell_sheet_name) # Línea para probar la ejecuión correcta de este script
 
