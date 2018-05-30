@@ -2,6 +2,7 @@ import os
 import datetime
 from reportlab.pdfgen import canvas
 from reportlab.lib.colors import pink, black, red, blue, green
+from reportlab.lib.units import inch, cm
 from pdfrw import PdfReader
 from pdfrw.buildxobj import pagexobj
 from pdfrw.toreportlab import makerl
