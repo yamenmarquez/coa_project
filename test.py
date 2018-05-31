@@ -7,7 +7,10 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 # from reportlab.lib.units import inch, cm
 # from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
-from reportlab.platypus import Table, TableStyle
+from reportlab.platypus import Table, TableStyle, Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
+stylesheet=getSampleStyleSheet()
+
 
 # Ruta donde se guaradaran los archivos
 saved_coa_path = ".coas_por_enviar" + os.sep
@@ -43,9 +46,13 @@ c.drawString(2.58*inch, 7.31*inch, '1200')
 # doc = SimpleDocTemplate("simple_table.pdf", pagesize=letter)
 # container for the 'Flowable' objects
 # elements = []
+
+aspecto = Paragraph('''
+                    MEZCLA HOMOGÉNEA PERLADA SIN PARTÍCULAS EN SUSPENSIÓN O GRUMOS''',
+                    stylesheet["BodyText"])
  
 data= [['Descripción', 'Especificación', 'Resultado'],
-       ['Aspecto', 'MEZCLA HOMOGÉNEA PERLADA' '\n' 'SIN PARTÍCULAS EN SUSPENSIÓN O GRUMOS', 'Cumple'],
+       ['Aspecto', aspecto, 'Cumple'],
        ['Color', 'SEGÚN MUESTRA DE REFERENCIA', 'Cumple'],
        ['Olor', 'SEGÚN MUESTRA DE REFERENCIA', 'Cumple'],
        ['pH', '5,75-6,25', '6,0'],
