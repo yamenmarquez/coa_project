@@ -7,7 +7,7 @@ doc = SimpleDocTemplate("simple_table.pdf", pagesize=letter)
 elements = []
  
 data= [['Descripción', 'Especificación', 'Resultado'],
-       ['Aspecto', 'MEZCLA HOMOGÉNEA PERLADA' '\n' 'SIN PARTÍCULAS EN SUSPENSIÓN O GRUMOS', 'Cumple'],
+       ['Aspecto', 'MEZCLA HOMOGÉNEA PERLADA SIN PARTÍCULAS EN SUSPENSIÓN O GRUMOS', 'Cumple'],
        ['Color', 'SEGÚN MUESTRA DE REFERENCIA', 'Cumple'],
        ['Olor', 'SEGÚN MUESTRA DE REFERENCIA', 'Cumple'],
        ['pH', '5,75-6,25', '6,0'],
@@ -16,8 +16,9 @@ data= [['Descripción', 'Especificación', 'Resultado'],
        ['Separación de fases', 'AUSENCIA', 'Cumple'],
        ['Atributos de Calidad', 'SEGÚN ANEXO 04 – ACUERDO DE CALIDAD', 'Cumple']]
 t=Table(data)
-t.setStyle(TableStyle([('BACKGROUND',(0,0),(2,0),colors.green),
-                       ('TEXTCOLOR',(0,0),(-1,-1),colors.blue)]))
+t.setStyle(TableStyle([('INNERGRID',(0,0),(-1,-1), 0.25, colors.black),
+                       ('BOX',(0,0),(-1,-1), 0.25, colors.black),
+                       ('TEXTCOLOR',(0,0),(-1,-1),colors.black)]))
 elements.append(t)
 # write the document to disk
 doc.build(elements)
