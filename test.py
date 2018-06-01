@@ -33,7 +33,7 @@ template = PdfReader(files_path + pdf_template_file_name, decompress=False).page
 t = pagexobj(template[0])
 c.doForm(makerl(c, t))
 c.setFillColor(colors.blue)
-c.drawString(1.8*inch, 8.92*inch, 'Quala')
+c.drawString(1.8*inch, 8.92*inch, 'Golderie')
 c.drawString(2.42*inch, 8.72*inch, 'COA-No-1111')
 c.drawString(2.06*inch, 8.51*inch, 'Shampoo Colageno 550 ml')
 c.drawString(1.60*inch, 8.32*inch, '0199')
